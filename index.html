@@ -46,7 +46,7 @@
           Puedes usar un ID DE USUARIO (ytUserId) o el NOMBRE DEL CANAL(ytUserName),
           SOLO UNO de los dos.
         */
-        var ytUserId = 'UCwWVbi7y-FtTFHxs33SR6vw';//ID del canal ejm: https://www.youtube.com/channel/[ID_DEL_CANAL]
+        var ytUserId = 'UC-PXsuqsvsS8AvUFxtBcetg';//ID del canal ejm: https://www.youtube.com/channel/[ID_DEL_CANAL]
         var ytUserName = ''; //Nombre de usuario ejm: https://www.youtube.com/user/[NOMBRE_DEL_CANAL]
         var key = 'AIzaSyDLAGqHmC83wZMiklux5vtovQlyzyHe55I';//tu API Key de Google: https://console.developers.google.com/apis/api/youtube/overview
         var urlYTApi = "https://www.googleapis.com/youtube/v3/channels?";
@@ -75,7 +75,7 @@
               var jsonObj = JSON.parse(conexion1.responseText);
               funcion(jsonObj);
             }else{
-              return console.log("error");
+              return null;
             }
           }
           conexion1.send();
