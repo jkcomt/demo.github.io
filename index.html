@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Jkcomt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="ytstyle.css">
+  </head>
+  <body>
+    <h1 id="nombre_canal">Nombre del Canal</h1>
+      <div id="item" >
+        <div id="yt_snippet">
+          <a href="" id="yt_link" target="_blank"><img id="img_canal" src=""></a>
+        </div>
+
+        <div id="yt_statistics">
+            <h1 id="subscriptores">Subscriptores</h1>
+            <h1 id="visitas">Visitas</h1>
+            <h1 id="videos">Videos</h1>
+        </div>
+      </div>
+      <!-- Créditos PAPU :V -->
+      <div id="creditos">
+        <small><a href="https://twitter.com/jkcomt" target="_blank">Twitter: @jkcomt</a> | <a>Email: jkcomt@gmail.com</a></small>
+      </div>
+
+    <script>
+        /*
+          LEEME
+          Esta pequeña aplicación muestra información de canales de youtube
+          haciendo uso del API de Youtube y javascript, para esto necesitas
+          SOLO UNA de dos cosas el ID de usuario o el Nombre del canal, ademas
+          una API KEY que consigues en la web de desarrolladores de google.
+
+          API KEY:
+          https://console.developers.google.com/apis/api/youtube/overview
+
+          Para más información del Youtube API:
+          https://developers.google.com/youtube/v3/
+
+        */
+        var statistics = document.getElementById('yt_statistics');
+        var snippet = document.getElementById('yt_snippet');
+        /*
+          Puedes usar un ID DE USUARIO (ytUserId) o el NOMBRE DEL CANAL(ytUserName),
+          SOLO UNO de los dos.
+        */
+        var ytUserId = 'UC889zu__e-SchavhX7IB1ug';//ID del canal ejm: https://www.youtube.com/channel/[ID_DEL_CANAL]
+        var ytUserName = ''; //Nombre de usuario ejm: https://www.youtube.com/user/[NOMBRE_DEL_CANAL]
+        var key = '';//tu API Key de Google: https://console.developers.google.com/apis/api/youtube/overview
+        var urlYTApi = "https://www.googleapis.com/youtube/v3/channels?";
+        var urlStatistics = '';
+        var conexion1;
+        /*
+          El url devuelve el JSON con información del
+          nombre del canal, imagen del canal, contador visitas,
+          subscriptores y cantidad de videos del canal.
+        */
+        urlStatistics = urlYTApi + "part=snippet%2Cstatistics&";
+        if (ytUserId != '' && ytUserName == '') {
+          urlStatistics = urlStatistics + "id=" + ytUserId + "&";
+        }else{
+          urlStatistics = urlStatistics + "forUsername=" + ytUserName + "&";
+        }
+        urlStatistics = urlStatistics + "fields=items(snippet(title%2Cthumbnails(default%2Chigh))%2C";
+        urlStatistics = urlStatistics + "statistics(viewCount%2CsubscriberCount%2CvideoCount))&";
+        urlStatistics = urlStatistics + "key=" + key;
+
+        function buscar(url,funcion) {
+          conexion1 = new XMLHttpRequest();
+          conexion1.open('GET',url,true);
+          conexion1.onreadystatechange = function() {
+            if (conexion1.readyState == 4 ) {
+              var jsonObj = JSON.parse(conexion1.responseText);
+              funcion(jsonObj);
+            }else{
+              return null;
+            }
+          }
+          conexion1.send();
+          console.log('buscando...');
+        }
+
+        function youtubeStatistics(jsonObj) {
+          var icon = document.getElementsByTagName('link');
+          var title = document.getElementsByTagName('title');
+          var nombreCanal = document.getElementById('nombre_canal');
+          var imgCanal = document.getElementById('img_canal');
+          var subscriptores = document.getElementById('subscriptores');
+          var visitas = document.getElementById('visitas');
+          var videos = document.getElementById('videos');
+
+          icon[0].href = jsonObj.items[0].snippet.thumbnails.default.url;
+          title[0].innerHTML = jsonObj.items[0].snippet.title;
+          linkYoutubeChannel();
+          nombreCanal.innerHTML = jsonObj.items[0].snippet.title;
+          imgCanal.src = jsonObj.items[0].snippet.thumbnails.high.url;
+
+          subscriptores.innerHTML = 'Subscriptores : ' + '<span>' + jsonObj.items[0].statistics.subscriberCount + '</span>';
+          visitas.innerHTML = 'Visitas : ' + '<span>' + jsonObj.items[0].statistics.viewCount + '</span>';
+          videos.innerHTML = 'Videos : ' + '<span>' + jsonObj.items[0].statistics.videoCount + '</span>';
+        }
+
+        function linkYoutubeChannel() {
+          var url = '';
+          var yt_link = document.getElementById('yt_link');
+          if (ytUserId != '' && ytUserName == '') {
+            url = 'https://www.youtube.com/channel/'+ytUserId;
+          }else{
+            url = 'https://www.youtube.com/user/'+ytUserName;
+          }
+          yt_link.href = url;
+        }
+
+        /*
+          El evento load ejecutar la función buscar() por primera vez
+          luego la función setInterval() ejecuta la búsqueda cada 5 segundos
+          pero se puede asignar el tiempo que se desee.
+        */
+        window.addEventListener('load',buscar(urlStatistics,youtubeStatistics),false);
+
+        setInterval(function(){buscar(urlStatistics,youtubeStatistics);},5000);
+    </script>
+  </body>
+</html>
