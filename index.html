@@ -75,7 +75,7 @@
               var jsonObj = JSON.parse(conexion1.responseText);
               funcion(jsonObj);
             }else{
-              return null;
+              return console.log("error");
             }
           }
           conexion1.send();
