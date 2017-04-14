@@ -113,7 +113,7 @@
   margin-bottom: 10px;
   padding: 5px;
   color: #000;
-  font-size: 20px;
+  font-size: 15px;
   background-color: white;
 }
 
@@ -137,11 +137,16 @@
   padding: 5px;
 }
 
+.btn-form-submit:focus{
+  outline: none;
+}
+
 .btn-form-submit:hover{
   background-color: #df2626;
 }
 
 .btn-form-submit:active{
+  outline: none;
   background-color: #911717;
 }
 @media screen and (max-width:780px) {
@@ -150,5 +155,14 @@
   }
   .pro_bg{
     background-blend-mode: hue;
+  }
+
+  .form-ctrl{
+    margin-bottom: 5px;
+    height: 30px;
+  }
+
+  .form-grp textarea{
+    height: 3em;
   }
 }
