@@ -170,7 +170,7 @@
 @media screen and (max-height:660px) {
 
   .pro-description{
-    top: 30%;
+    /*top: 30%;*/
   }
 
   .text-description h1{
