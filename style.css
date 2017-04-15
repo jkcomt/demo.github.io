@@ -1,6 +1,15 @@
 .crl-white{
   color: #fff;
 }
+
+.bg-crl-black{
+  background-color: #2b2b2b;
+}
+
+.brd-right{
+  border-right: 1px solid white;
+}
+
 .center{
   text-align: center;
   margin-bottom: 2em;
@@ -69,7 +78,12 @@
 
 .text-description li{
   list-style-type: none;
-  text-shadow: 1px 2px 1px white;
+  /*text-shadow: 1px 2px 1px white;*/
+}
+
+.lnks-deco a{
+  text-decoration: none;
+  color: #fff;
 }
 
 .pro_bg{
@@ -85,6 +99,7 @@
 }
 
 #contact{
+  margin-top: 50px;
   height: 95vh;
   padding: 0px;
   background-color: #cc1f00;
@@ -149,6 +164,19 @@
   outline: none;
   background-color: #911717;
 }
+
+
+#footer{
+  /*height: 25vh;*/
+}
+
+
+.ftr-card{
+  margin-left: 50px;
+  margin-bottom: 10px;
+  height: 150px;
+}
+
 @media screen and (max-width:780px) {
   .text-description{
     padding-left: 25%
