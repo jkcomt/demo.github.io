@@ -186,7 +186,6 @@
 
 #ft-footer{
   position: relative;
-  /*padding-top: 50px;*/
   height: 95vh;
 }
 .footer{
@@ -220,6 +219,10 @@
 
   .form-grp textarea{
     height: 3em;
+  }
+
+  .footer h1,h2{
+    font-size: 20px;
   }
 }
 
