@@ -226,6 +226,12 @@
   }
 }
 
+@media screen and (max-width:512px) {
+  .footer h1,h2{
+    font-size: 18px;
+  }
+}
+
 @media screen and (max-height:660px) {
 
   .pro-description{
