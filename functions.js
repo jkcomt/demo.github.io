@@ -14,4 +14,7 @@ $(document).ready(function () {
       });
     }
   });
+
+  var d = new Date();
+  $('#year').html(d.getFullYear());
 });
